@@ -4,6 +4,12 @@ body {
 
 main {
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center; 
+    row-gap: 20px;
+
 }
 
 section {
@@ -11,3 +17,4 @@ section {
     width: 200px;
     height: 75px;
 }
+

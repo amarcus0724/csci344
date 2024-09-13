@@ -33,9 +33,13 @@ body {
 /* Task 3 */
 
 .container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
 }
 
 header {
+  grid-column-start: 1;
+  grid-column-end: 4;
 }
 
 nav {
@@ -45,6 +49,10 @@ aside {
 }
 
 section {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 4;
 }
 
 main {

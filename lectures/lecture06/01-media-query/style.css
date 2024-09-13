@@ -25,6 +25,19 @@ footer {
 }
 
 @media screen and (max-width: 800px) {
-    /* Your code here! */
+   header {
+        background-color: #333;
+        color: white;
+   }   
+   
+   main {
+    background-color: lightgray;
+
+   }
+
+   footer {
+    background-color: orange;
+    color: white;
+   }
 }
 
