@@ -16,7 +16,8 @@ function setup() {
 
    //drawNShapesFlexible(6, 25, 400, 0, square)
 
-   drawNShapesDirectionFlexible(5, 25, 400, 0, circle, row)
+   drawNShapesDirectionFlexible(5, 25, 400, 0, "circle", "row")
+ 
 
 
     
@@ -112,9 +113,19 @@ function draw5CirclesFor() {
 
     function drawNShapesDirectionFlexible(n, size, x, y, shape, direction) {
         for (let i = 0; i < n; i++) {
-            square(x, y, size);
+            if (shape === "square"){
+               square(x, y, size); 
+            } else {
+                circle(x, y, size); 
+            }
+            
             console.log(i);
-            y += size;
+            if (direction === "column") {
+                y += size;
+            } else {
+                x += size;
+            }
+            
         }
     }// couldnt figure out this last one.
 
