@@ -1,10 +1,12 @@
 const makeBigger = () => {
    
-   document.querySelector().style.fontSize = 30;
+   document.querySelector("h1").style.fontSize = "40px";
+   document.querySelector("body").style.fontSize = "40px";
 };
 
 const makeSmaller = () => {
-   alert('make smaller!');
+   document.querySelector("h1").style.fontSize = "10px";
+   document.querySelector("body").style.fontSize = "10px";
 };
 
 /*
