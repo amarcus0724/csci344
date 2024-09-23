@@ -65,6 +65,11 @@ main {
     
 }
 
+.suggestionContainer {
+    display: grid;
+    grid-template-columns: 80px auto 80px
+}
+
 
 
 
