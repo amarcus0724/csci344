@@ -19,37 +19,37 @@
 //    the HTML string into the DOM.
 
 const search = (ev) => {
-    ev.preventDefault(); // overrides default button action
+  ev.preventDefault(); // overrides default button action
 
-    // Get user's preferences:
-    const searchTerm = document.querySelector("#search_term").value;
-    const openOnly = document.querySelector("#is_open").checked;
+  // Get user's preferences:
+  const searchTerm = document.querySelector("#search_term").value;
+  const openOnly = document.querySelector("#is_open").checked;
 
-    // Pass the user's preferences into the showData function
-    showData(searchTerm, openOnly);
+  // Pass the user's preferences into the showData function
+  showData(searchTerm, openOnly);
 };
 
 // Part 1.1a
 const filterClassFull = (course) => {
-    // modify this
-    return true;
+  // modify this
+  return true;
 };
 
 // Part 1.1b
 const filterTermMatched = (course) => {
-    // modify this
-    return true;
+  // modify this
+  return true;
 };
 
 // Part 1.2
 const dataToHTML = (course) => {
-    // modify this
-    return `
+  // modify this
+  return `
     <section class="course">
     <h2>${course.Code}: ${course.Title}</h2>
     <p>
-        <i class="fa-solid fa-circle-xmark"></i> 
-        Closed &bull; 10498 &bull; Number on Waitlist 0
+        
+        ${course.Classification.Open} &bull; 10498 &bull; Number on Waitlist 0
     </p>
     <p>
     ${course.Days} &bull; ${course.Location.FullLocation} &bull; ${course.Hours} credit hour(s)  
@@ -62,29 +62,39 @@ const dataToHTML = (course) => {
     `;
 };
 
-
 const addCourseToDOM = (course) => {
-    const htmlSnippet = dataToHTML(course);
-    const containerEl = document.querySelector(".courses");
-    containerEl.innerHTML += htmlSnippet;
-}
+  const htmlSnippet = dataToHTML(course);
+  const containerEl = document.querySelector(".courses");
+  containerEl.innerHTML += htmlSnippet;
+};
 
 // Part 2
 const showData = (searchTerm, openOnly) => {
-    console.log(searchTerm, openOnly);
-    console.log(data); // imported from course-data.js
-    // Your code here: goal: output every course to the screen
-    // 1 generate an html smippet of course
-    // 2 insert snippet to the DOM
+  console.log(searchTerm, openOnly);
+  console.log(data); // imported from course-data.js
+  // Your code here: goal: output every course to the screen
+  // 1 generate an html smippet of course
+  // 2 insert snippet to the DOM
 
+  const searchTermMatch = (course) => {
+    if (course.Title.toLowerCase().includes(searchTerm.toLowerCase())) {
+      return true;
+    }
+    return false;
+  };
 
-const searchTermMatch = (course) => {
-
-    if (course.Title.toLowerCase().includes (searchTerm.toLowerCase()))
-    {
+  const openClassesOnly = (course) => {
+    if (course.Classification.Open) {
         return true;
     }
     return false;
-};
-data.filter(searchTermMatch).forEach(addCourseToDOM);
+  }
+  let matchedCourses = data.filter(searchTermMatch);
+  if (openOnly) {
+   matchedCourses = matchedCourses.filter(openClassesOnly)
+  }
+  const containerEl = document.querySelector(".courses");
+  containerEl.innerHTML = "";
+    matchedCourses.forEach(addCourseToDOM);
+  //data.filter(searchTermMatch).forEach(addCourseToDOM);
 };
