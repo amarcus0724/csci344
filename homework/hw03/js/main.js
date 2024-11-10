@@ -63,6 +63,7 @@ function showPosts(posts){
         <img src="${post.image_url}" alt="${post.alt_text}" width="300" height="300"
             class="w-full bg-cover">
         <div class="p-4">
+          
             <div class="flex justify-between text-2xl mb-3">
                 <div>
                     <button><i class="far fa-heart"></i></button>
@@ -73,24 +74,21 @@ function showPosts(posts){
                     <button><i class="far fa-bookmark"></i></button>
                 </div>
             </div>
-            <p class="font-bold mb-3">30 likes</p>
+           
+            <p class="font-bold mb-3">${post.likes.length} like(s)</p>
+
+            <!-- Caption from person who created the post -->
             <div class="text-sm mb-3">
                 <p>
-                    <strong>gibsonjack</strong>
-                    Here is a caption about the photo.
-                    Text text text text text text text text text
-                    text text text text text text text text... <button class="button">more</button>
+                    <strong>${post.user.username}</strong>
+                    ${post.caption}
                 </p>
             </div>
-            <p class="text-sm mb-3">
-                <strong>lizzie</strong>
-                Here is a comment text text text text text text text text.
-            </p>
-            <p class="text-sm mb-3">
-                <strong>vanek97</strong>
-                Here is another comment text text text.
-            </p>
-            <p class="uppercase text-gray-500 text-xs">1 day ago</p>
+            
+            ${showComments(post.comments)}
+          
+          
+            <p class="uppercase text-gray-500 text-xs">${post.display_time}</p>
         </div>
         <div class="flex justify-between items-center p-3">
             <div class="flex items-center gap-3 min-w-[80%]">
@@ -104,6 +102,29 @@ function showPosts(posts){
         `
         mainEL.insertAdjacentHTML("beforeend", template);
     });
+}
+
+function showComments(comments) {
+    if(comments.length > 1){
+        const lastComment = comments[comments.length - 1];
+        return `
+            <button class="text-sm mb-3"> view all ${comments.length} comments </button>
+            <p class="text-sm mb-3"> 
+            <strong> >${lastComment.user.username} </strong> ${lastComment.text}
+            </p>
+        `;
+
+    }
+    if(comments.length === 1 ) {
+        const lastComment = comments[0]
+        return `<p class="text-sm mb-3"> 
+        <strong> ${lastComment.user.username} </strong> ${lastComment.text}
+        </p>`
+    }
+    return " ";
+
+
+
 }
 
 
