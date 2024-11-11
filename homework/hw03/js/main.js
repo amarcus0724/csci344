@@ -170,7 +170,7 @@ function getBookmarkButton(post) {
         method: "DELETE",
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTczMTI3NTcyNywianRpIjoiZDVkZmM5YmItMjBkZC00YmUxLWFmMjItYTAyYTQwZTBkMGNiIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MiwibmJmIjoxNzMxMjc1NzI3LCJjc3JmIjoiN2E2YjkyMjYtZjA4Ni00MDNkLWI0OTAtNzM0MTE5Mjk2MTkxIiwiZXhwIjoxNzMxMjc2NjI3fQ.mS03tHvBewF-hyxL5ecCpVL3itvLNZsl9M8WIrRs7IQ'
+            'Authorization': 'Bearer '
         }
     });
     const data = await response.json();
