@@ -66,12 +66,13 @@ function showPosts(posts){
           
             <div class="flex justify-between text-2xl mb-3">
                 <div>
-                    <button><i class="far fa-heart"></i></button>
+                ${ getLikeButton(post) }
+                
                     <button><i class="far fa-comment"></i></button>
                     <button><i class="far fa-paper-plane"></i></button>
                 </div>
                 <div>
-                    <button><i class="far fa-bookmark"></i></button>
+                    ${ getBookmarkButton(post)}
                 </div>
             </div>
            
@@ -126,6 +127,58 @@ function showComments(comments) {
 
 
 }
+
+function getLikeButton(post) {
+    let iconClass = "far"
+    if (post.current_user_like_id) {
+       iconClass= "fa-solid  text-red-700 " 
+    }
+    return `<button> <i class = "${iconClass} fa-heart"> </i> </button>`;
+   
+}
+
+function getBookmarkButton(post) {
+
+    if (post.current_user_bookmark_id) {
+        return `<button onclick="deletebookmark ${(post.current_user_bookmark_id)}"> <i class = "fa-solid   fa-bookmark"> </i> </button>` 
+    } else {
+        return `<button onclick="createBookmark(${post_id})"> <i class = " far fa-bookmark"> </i> </button>`;
+    }
+}
+
+ 
+
+     window.createBookmark = async function(postID) {
+        const postData = {
+            "post_id": postID,
+        };
+        
+         
+            const response = await fetch("https://photo-app-secured.herokuapp.com/api/bookmarks/", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(postData)
+            });
+            const data = await response.json();
+            console.log(data);
+        }
+    window.deleteBookmark = async function(bookmarkId) {
+        const response = await fetch(`https://photo-app-secured.herokuapp.com/api/bookmarks/${bookmarkId}`, {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTczMTI3NTcyNywianRpIjoiZDVkZmM5YmItMjBkZC00YmUxLWFmMjItYTAyYTQwZTBkMGNiIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MiwibmJmIjoxNzMxMjc1NzI3LCJjc3JmIjoiN2E2YjkyMjYtZjA4Ni00MDNkLWI0OTAtNzM0MTE5Mjk2MTkxIiwiZXhwIjoxNzMxMjc2NjI3fQ.mS03tHvBewF-hyxL5ecCpVL3itvLNZsl9M8WIrRs7IQ'
+        }
+    });
+    const data = await response.json();
+    console.log(data);
+    }
+   
+
+
 
 
 
