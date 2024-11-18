@@ -11,6 +11,7 @@ async function initializeScreen() {
   getStories();
   getProfile();
   getSuggested();
+
 }
 
 async function getToken() {
@@ -74,7 +75,7 @@ function showStories(stories) {
   const mainEL = document.querySelector("#storypanel");
   stories.forEach((story) => {
     const template = `<div class="flex flex-col justify-center items-center">
-        <img src="${story.user.thumb_url}" class="rounded-full border-4 border-gray-300" />
+        <img src="${story.user.thumb_url}" alt = "picture of ${story.user.username}" class="rounded-full border-4 border-gray-300" />
         <p class="text-xs text-gray-500">${story.user.username}</p>
     </div>`;
     mainEL.insertAdjacentHTML("beforeend", template);
@@ -96,14 +97,15 @@ async function getProfile() {
 }
 
 function showProfile(profile){
+    console.log(profile);
     const mainEL = document.querySelector("#userprofile");
-    profile.forEach((userpro) => {
+    // profile.forEach((userpro) => {
       const template = `<header class="flex gap-4 items-center">
-      <img src="${userpro.user.thumb_url}" class="rounded-full w-16" />
-      <h2 class="font-Comfortaa font-bold text-2xl">${userpro.user.username}</h2>
+      <img src="${profile.thumb_url}" alt ="${profile.alt_text}"class="rounded-full w-16" />
+      <h2 class="font-Comfortaa font-bold text-2xl">${profile.username}</h2>
   </header>`;
       mainEL.insertAdjacentHTML("beforeend", template);
-    });
+    // });
 
 }
 
@@ -121,10 +123,18 @@ async function getSuggested() {
     showSuggested(suggested);
 }
 
-function showProfile(suggested){
-    const mainEL = document.querySelector("#userprofile");
+function showSuggested(suggested){
+    const mainEL = document.querySelector("#foryou");
+    console.log(suggested);
     suggested.forEach((suggestedFollower) => {
-      const template = ``;
+      const template = `<section id ="foryou" class="flex justify-between items-center mb-4 gap-2">
+      <img src="${suggestedFollower.thumb_url}" alt="${suggestedFollower.username}" class="rounded-full" />
+      <div class="w-[180px]">
+          <p class="font-bold text-sm">${suggestedFollower.username}</p>
+          <p class="text-gray-600 text-xs">suggested for you</p>
+      </div>
+      <button class="text-blue-600 text-sm py-2" aria-label="Follow">follow</button>
+  </section>`;
       mainEL.insertAdjacentHTML("beforeend", template);
     });
 
@@ -141,7 +151,7 @@ function showPosts(posts) {
             <h3 class="text-lg font-Comfortaa font-bold">${
               post.user.username
             }</h3>
-            <button class="icon-button"><i class="fas fa-ellipsis-h"></i></button>
+            <button class="icon-button" aria-label="Menu" ><i class="fas fa-ellipsis-h" ></i></button>
         </div>
         <img src="${post.image_url}" alt="${
       post.alt_text
@@ -153,8 +163,8 @@ function showPosts(posts) {
                 <div>
                 ${getLikeButton(post)}
                 
-                    <button><i class="far fa-comment"></i></button>
-                    <button><i class="far fa-paper-plane"></i></button>
+                    <button aria-label="Comment"><i class="far fa-comment"></i></button>
+                    <button aria-label="Share"><i class="far fa-paper-plane"></i></button>
                 </div>
                 <div>
                     ${getBookmarkButton(post)}
@@ -173,15 +183,16 @@ function showPosts(posts) {
             
             ${showComments(post.comments)}
           
-          
+       
             <p class="uppercase text-gray-500 text-xs">${post.display_time}</p>
         </div>
         <div class="flex justify-between items-center p-3">
             <div class="flex items-center gap-3 min-w-[80%]">
                 <i class="far fa-smile text-lg"></i>
-                <input type="text" class="min-w-[80%] focus:outline-none" placeholder="Add a comment...">
+               
+                <input type="text" aria-label = "add a comment" id="commentInput" class="min-w-[80%] focus:outline-none" placeholder="Add a comment...">
             </div>
-            <button class="text-blue-500 py-2">Post</button>
+            <button class="text-blue-600 py-2">Post</button>
         </div>
     </section>
         
@@ -189,7 +200,7 @@ function showPosts(posts) {
     mainEL.insertAdjacentHTML("beforeend", template);
   });
 }
-
+ //    <label for="commentInput" >Add a comment</label>
 function showComments(comments) {
   if (comments.length > 1) {
     const lastComment = comments[comments.length - 1];
@@ -210,18 +221,22 @@ function showComments(comments) {
 }
 
 function getLikeButton(post) {
-  let iconClass = "far";
+ let iconClass = "far";
   if (post.current_user_like_id) {
-    iconClass = "fa-solid  text-red-700 ";
+    return `<button onclick = "deleteLike(${post.current_user_like_id})" aria-label="Delete like"> <i class = "fa-heart fa-solid text-red-700"> </i> </button>`;
+    
+  } else {
+    return `<button onclick = " createLike(${post.id})" aria-label="Like post"> <i class =" far  fa-heart"> </i> </button>`;
+// return `class = "fa-heart"`;
   }
-  return `<button> <i class = "${iconClass} fa-heart"> </i> </button>`;
+  
 }
 
 function getBookmarkButton(post) {
   if (post.current_user_bookmark_id) {
-    return `<button onclick="deleteBookmark(${post.current_user_bookmark_id}) "> <i class = "fa-solid   fa-bookmark"> </i> </button>`;
+    return `<button onclick="deleteBookmark(${post.current_user_bookmark_id}) " aria-label="Delete Bookmark"> <i class = "fa-solid   fa-bookmark"> </i> </button>`;
   } else {
-    return `<button onclick="createBookmark(${post.id})"> <i class = " far fa-bookmark"> </i> </button>`;
+    return `<button onclick="createBookmark(${post.id})" aria-label="Bookmark post"> <i class = " far fa-bookmark"> </i> </button>`;
   }
 }
 
@@ -259,5 +274,47 @@ window.deleteBookmark = async function (bookmarkId) {
   console.log(data);
 };
 
+
+
+
+
+
+
+
+
+
+window.createLike = async function (postID) {
+    const postData = {
+      post_id: postID,
+    };
+  
+    const response = await fetch(
+      "https://photo-app-secured.herokuapp.com/api/likes/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(postData),
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+  };
+  window.deleteLike = async function (likeId) {
+    const response = await fetch(
+      `https://photo-app-secured.herokuapp.com/api/likes/${likeId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+  };
 // after all of the functions are defined, invoke initialize at the bottom:
 initializeScreen();
