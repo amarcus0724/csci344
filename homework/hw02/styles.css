@@ -84,7 +84,7 @@ main {
 .suggestion h1, .suggestion p {
     margin:0;
 }
-img {
+.imgborder {
     border-radius: 50%;
 }
 
@@ -103,6 +103,18 @@ aside button {
     font-size: 50px;
 }
 
+
+.storycontainer{
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.stories{
+    
+}
 
 
 
