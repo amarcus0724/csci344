@@ -30,11 +30,11 @@ export default function Bookmark({token, bookmarkId, postId}) {
 
     if (stateBookmarkId) {
        return (
-        <button ariaLabel="Unbookmark this post" ariaChecked="true" ariaRole="toggle" onClick={deleteBookmark} ><i className="fas fa-bookmark"></i></button>
+        <button aria-label="Unbookmark this post" aria-checked="true" role="toggle" onClick={deleteBookmark} ><i className="fas fa-bookmark"></i></button>
     );  
     } else {
         return (
-            <button ariaLabel="Bookmark this post" ariaChecked="false" ariaRole="toggle" onClick={createBookmark}><i className="far fa-bookmark"></i></button>
+            <button aria-label="Bookmark this post" aria-checked="false" role="toggle" onClick={createBookmark}><i className="far fa-bookmark"></i></button>
         );  
     }
    
