@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
+
+body * {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #F4F4F4;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Begin Debugging Code */
+header,
+main,
+section,
+article,
+nav,
+.logo {
+    /* border: solid 2px #CCC; */
+    padding: 10px;
+    margin: 10px;
+}
+
+.logo {
+    font-size: 1em;
+    font-weight: normal;
+}
+
+
+body>header,
+main,
+.news-feed {
+    /* border: solid 4px #000; */
+    padding: 10px;
+    margin: 10px;
+    
+}
+
+/* End Debugging Code */
+
+#topheader {
+    background-color: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 30px;
+}
+button{
+    font-size: 20px;
+    background: none;
+    border: none;
+}
+
+aside {
+    background-color: transparent;
+    position: fixed;
+    right: 25px;
+    top: 100px;
+    margin: 0;
+    width: 30vw;
+    
+    
+}
+
+main {
+    margin-top: 100px;
+    width: 60vw;
+   
+    
+}
+
+/* suggestions css */
+
+.suggestion {
+    
+    display: grid;
+    grid-template-columns: 80px auto 80px;
+    gap: 10px;
+    align-items: center;
+}
+
+.suggestion img {
+    width: 40px;
+    height: 40px;
+
+}
+.suggestion h3, .suggestion p {
+    margin:0;
+    font-size: 14px;
+}
+.imgborder {
+    border-radius: 50%;
+    object-fit: cover;
+    
+}
+
+
+.imgstory {
+    border-radius: 50%;
+    object-fit: cover;
+    border: solid 3px #ccc;
+    width: 60px;
+    height: 60px;
+}
+aside button {
+    background: transparent;
+    border-radius: 0; 
+    color: blue;
+    padding: 0;
+}
+
+.currentuser{
+    display: grid;
+    grid-template-columns: 80px auto 80px;
+
+    gap: 40px;
+    font-size: 50px;
+}
+
+/* stories css */
+.storycontainer{
+    
+    display: flex;
+    /* flex-direction: row; */
+    justify-content: flex-start;
+    /* align-items: center; */
+    gap: 5px;
+    padding: 10px 0;
+    background-color: white;
+    overflow-x: auto;
+    
+}
+.stories p{
+    
+    color: #565656;
+    margin: 0;
+    
+}
+
+.stories{
+    text-align: center;
+    font-size: 14px;
+}
+
+/* post css */
+
+.post {
+    background-color: white;
+    border: solid 1px #ccc;
+    margin-bottom: 20px;
+}
+
+.post h3 {
+    font-family: "Comfortaa", sans-serif;
+    font-size: 25px;
+}
+h1 {
+    font-family: "Comfortaa", sans-serif;
+}
+
+.user{
+    font-family: "Comfortaa", sans-serif;
+}
+
+.pic{
+    width: 100%;
+}
+.icons {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.postheader {
+    display: flex;
+    justify-content: space-between;
+  
+}
+.icon-button {
+    background: none;
+    border: none;
+    font-size: 20px;
+}
+
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    
+    
+}
+
+
+
+
+@media (max-width: 800px) {
+    aside {
+        display: none;
+    }
+
+    main {
+        margin-top: 100px;
+        width: 100%;
+        margin-right: 0;
+        margin-left: 0;
+        padding: 20px;
+        
+    }
+
+ 
+
+}
+
